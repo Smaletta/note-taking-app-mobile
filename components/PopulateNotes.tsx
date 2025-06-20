@@ -20,8 +20,6 @@ export const PopulateNotes = async () => {
     const colorScheme = useColorScheme();
 
 
-
-
     useEffect(() => {
         const fetchDirectoryItems = async () => {
             try {
@@ -35,13 +33,13 @@ export const PopulateNotes = async () => {
         fetchDirectoryItems();
     }, [fileUri]);
 
-    const handleNotePress = async (notes: string[]) => {
+    const handleNotePress = async (notes: string) => {
         openEditModal();
-        setFileName(notes[0]);
-        onChangeTitleNote(notes[0]);
+        setFileName(notes);
+        onChangeTitleNote(notes);
         onChangeTextNote(
             await FileSystem.readAsStringAsync(
-                FileSystem.documentDirectory + `notes/${notes[0]}`
+                FileSystem.documentDirectory + `notes/${notes}`
             )
         );
     };
@@ -65,7 +63,7 @@ export const PopulateNotes = async () => {
 
     const renderItem = ({ item }: { item: string }) => {
         return (
-            <Button title={item} onPress={() => handleNotePress([item])} />
+            <Button title={item} onPress={() => handleNotePress(item)} />
         );
     };
 
@@ -125,14 +123,13 @@ export const PopulateNotes = async () => {
         );
     };
 
-    { editModalVisible && <EditNote content={<EditNoteContents />} /> }
-
     return (
         <>
             <FlatList
                 data={notes}
                 renderItem={renderItem}
             />
+             {  editModalVisible && <EditNote content={<EditNoteContents />} /> }
         </>
     );
 }
