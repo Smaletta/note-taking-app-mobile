@@ -14,17 +14,17 @@ export default function Index() {
   }
 
   return (
-      <ThemedView
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {CreateNewNote()}
-        <ThemedText type='title'>Notes</ThemedText>
-        {PopulateNotes()}
+    <ThemedView
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      {CreateNewNote()}
+      <ThemedText type='title'>Notes</ThemedText>
+      {PopulateNotes()}
 
-      </ThemedView>
+    </ThemedView>
   );
 }

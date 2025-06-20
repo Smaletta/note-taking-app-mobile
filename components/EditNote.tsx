@@ -6,7 +6,6 @@ import { KeyboardAvoidingView } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useEditModal } from '@/context/EditModalContext';
-import { ThemedText } from './ThemedText';
 
 export const EditNote = ({ content}: { content: React.ReactNode })  => {
     const fileUri = FileSystem.documentDirectory + `notes`;
@@ -18,16 +17,14 @@ export const EditNote = ({ content}: { content: React.ReactNode })  => {
         <>
             <Modal
                 visible={editModalVisible}
-                transparent={false}
+                transparent={true}
                 animationType='slide'
-                style = {{backgroundColor: 'red'}}
             >
                 <SafeAreaProvider>
                     <SafeAreaView style={{ flex: 1 }}>
                         <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
                             <ThemedView
                                 style={{ flex: 1, padding: 20 }}>
-                                    <ThemedText type="title">Wobbly Bobbly</ThemedText>
                                 {content}
                             </ThemedView>
                         </KeyboardAvoidingView>
