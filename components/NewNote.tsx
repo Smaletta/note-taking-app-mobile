@@ -22,7 +22,6 @@ export const NewNote = () => {
             return alert('Note already exists.');
         }
         try {
-            console.log('This code is being reached');
             await FileSystem.writeAsStringAsync(
                 FileSystem.documentDirectory + `notes/${titleNewNote}`,
                 textNewNote

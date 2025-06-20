@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import { Modal, FlatList, Button } from 'react-native';
+import { FlatList, Button } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import { ThemedView } from './ThemedView';
 import { ThemedTextInput } from './ThemedTextInput';
 import { KeyboardAvoidingView } from 'react-native';
 import { Alert } from 'react-native';
-import { useColorScheme } from '@/hooks/useColorScheme';
 import { useEditModal } from '@/context/EditModalContext';
 import { EditNote } from './EditNote';
 
@@ -17,7 +16,6 @@ export const PopulateNotes = async () => {
     const [textNote, onChangeTextNote] = React.useState('');
     const { editModalVisible, openEditModal, closeEditModal } = useEditModal();
     const [fileName, setFileName] = React.useState('');
-    const colorScheme = useColorScheme();
 
 
 
@@ -27,6 +25,7 @@ export const PopulateNotes = async () => {
             try {
                 const directoryContents = await FileSystem.readDirectoryAsync(fileUri);
                 setNotes(directoryContents);
+                console.log("Directory Updated.")
             } catch (error) {
                 console.error("Error reading directory", error)
             }
@@ -125,6 +124,7 @@ export const PopulateNotes = async () => {
         );
     };
 
+    
     { editModalVisible && <EditNote content={<EditNoteContents />} /> }
 
     return (
@@ -132,6 +132,7 @@ export const PopulateNotes = async () => {
             <FlatList
                 data={notes}
                 renderItem={renderItem}
+                extraData={editModalVisible}
             />
         </>
     );
